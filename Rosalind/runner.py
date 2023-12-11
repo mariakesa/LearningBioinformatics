@@ -23,13 +23,16 @@ def runner(debug, ex_data):
     
     if debug:
         print('In debug mode!')
-        debug_path = current_dir / Path('data') / Path('debug') / caller_dict[debug]['debug_dataset']
+        debug_path = current_dir / Path('data') / Path('debug') / caller_dict[debug]['dataset']
         algorithm = caller_dict[debug]['algorithm_function']
         data = open_data(debug_path)
         algorithm(data)
-        # Rest of your code for debug mode
     elif ex_data:
         print('In exercise mode!')
+        debug_path = current_dir / Path('data') / Path('ex_data') / caller_dict[ex_data]['dataset']
+        algorithm = caller_dict[ex_data]['algorithm_function']
+        data = open_data(debug_path)
+        algorithm(data)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Your script description")
