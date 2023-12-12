@@ -1,3 +1,11 @@
+
+def hamming_distance(sequence_p, sequence_q):
+    hamming_d=0
+    for ind, _ in enumerate(sequence_p):
+        if sequence_p[ind]!=sequence_q[ind]:
+            hamming_d+=1
+    return hamming_d
+
 def hash_sequence(sequence, k):
     '''
     Converts a sequence into

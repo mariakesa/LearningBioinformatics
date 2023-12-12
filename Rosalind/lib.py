@@ -1,4 +1,60 @@
-from helpers import find_kmers_in_window, hash_sequence
+from helpers import find_kmers_in_window, hash_sequence, hamming_distance
+import numpy as np
+
+def BA1H(input_list):
+    '''
+    Approximate occurences of patterns in a string'
+    '''
+    match_string=input_list[0]
+    sequence=input_list[1]
+    d_threshold=int(input_list[2])
+    k=len(match_string)
+    positions=[]
+    for ind in range(0,len(sequence)-k+1):
+        seq_kmer=sequence[ind:ind+k]
+        hamming_d=hamming_distance(seq_kmer, match_string)
+        if hamming_d<=d_threshold:
+            positions.append(ind)
+    positions=[str(x) for x in positions]
+    print(' '.join(positions))
+    return ' '.join(positions)
+
+
+def BA1G(input_list):
+    '''
+    Find Hamming distance between two sequences.
+
+    Complexity: O(len(sequences))
+    '''
+    sequence_p=input_list[0]
+    sequence_q=input_list[1]
+    hamming_d=hamming_distance(sequence_p, sequence_q)
+    print(hamming_d)
+    return hamming_d
+
+
+def BA1F(input_list):
+    '''
+    Find minimal skew between count
+    of G and C from sequential prefixes.
+    Complexity: O(len(sequence))
+    '''
+    CG_counts={'G':0,
+               'C':0}
+    sequence=input_list[0]
+    skews=[0]
+    for i in range(0, len(sequence)):
+        if sequence[i]=='C':
+            CG_counts['C']+=1
+        if sequence[i]=='G':
+            CG_counts['G']+=1
+        skew=CG_counts['G']-CG_counts['C']
+        skews.append(skew)
+    minimums=np.where(skews == np.array(skews).min())[0].tolist()
+    str_minimums=[str(x) for x in minimums]
+    print(' '.join(str_minimums))
+    return ' '.join(str_minimums)
+    
 
 def BA1E(input_list):
     '''
@@ -7,6 +63,8 @@ def BA1E(input_list):
     L--> length of clump (window)
     t--> how many times the kmer occurs
     in clump
+
+    Complexity: O(len(sequence)*L)
     '''
     sequence=input_list[0]
     k, L, t = input_list[1].split(' ')
@@ -30,6 +88,7 @@ def BA1D(input_list):
     '''
     Finds the locations of a
     substring in a string.
+    Complexity: O(len(sequence)*k)
     '''
     kmer=input_list[0]
     sequence=input_list[1]
@@ -45,6 +104,7 @@ def BA1D(input_list):
 def BA1C(input_list):
     '''
     Find reverse complement of sequence.
+    Complexity: O(len(sequence))
     '''
     sequence=input_list[0]
     reverse_dct ={
@@ -87,6 +147,9 @@ def BA1B(input_list):
     return most_frequent_kmers, max_count
 
 def BA1A(input_list):
+    '''
+    Count number of times kmer occurs in genome.
+    '''
     sequence=input_list[0]
     kmer=input_list[1]
     k=len(kmer)
