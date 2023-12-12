@@ -1,5 +1,4 @@
 from helpers import find_kmers_in_window, hash_sequence
-import numpy as np
 
 def BA1E(input_list):
     '''
@@ -20,7 +19,7 @@ def BA1E(input_list):
         found_kmers = find_kmers_in_window(window,k, t)
         if found_kmers:
             solution_list+=found_kmers
-    solution_list=np.unique(solution_list)
+    solution_list=set(solution_list)
     solution_list=list(solution_list)
     print(' '.join(solution_list))
     return ' '.join(solution_list)
