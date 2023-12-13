@@ -1,9 +1,86 @@
-from helpers import find_kmers_in_window, hash_sequence, hamming_distance
+from helpers import generate_reverse_comp_hash, generate_all_subseq, find_kmers_in_window, hash_sequence, hamming_distance
 import numpy as np
+
+def BA1K(input_list):
+    '''
+    Number of times k-mer
+    appears in sequence
+    with k-mers appear in
+    lexicographic order.
+    '''
+    sequence=input_list[0]
+    k=int(input_list[1])
+    hash=generate_all_subseq(k)
+    for s in range(0, len(sequence)-k+1):
+        hash[sequence[s:s+k]]+=1
+    sorted_dict = dict(sorted(hash.items()))
+    print(' '.join(map(str, sorted_dict)))
+
+
+def BA1J(input_list):
+    '''
+    Frequent words with mismatches
+    and reverse complements. Find
+    pattern that maximizes the sum
+    of its counts with mismatches 
+    and its reverse complement counts
+    with mismatches. 
+    '''
+    sequence=input_list[0]
+    k, d = input_list[1].split(' ')
+    k=int(k)
+    d=int(d)
+    hash_table=generate_all_subseq(k)
+    rev_hash=generate_reverse_comp_hash(k)
+    for ind in range(0,len(sequence)-k+1):
+        seq=sequence[ind:ind+k]
+        for key in hash_table.keys():
+            if hamming_distance(seq,key)<=d:
+                hash_table[key]+=1
+                hash_table[rev_hash[key]]+=1
+
+    max_count = 0
+    most_frequent_kmers = []
+
+    for kmer, count in hash_table.items():
+        if count > max_count:
+            max_count = count
+            most_frequent_kmers = [kmer]
+        elif count == max_count:
+            most_frequent_kmers.append(kmer)
+
+    print(' '.join(most_frequent_kmers))
+
+def BA1I(input_list):
+    '''
+    Find all most frequent kmers up to d mismatches in text.
+    '''
+    sequence=input_list[0]
+    k, d = input_list[1].split(' ')
+    k=int(k)
+    d=int(d)
+    hash_table=generate_all_subseq(k)
+    for ind in range(0,len(sequence)-k+1):
+        seq=sequence[ind:ind+k]
+        for key in hash_table.keys():
+            if hamming_distance(seq,key)<=d:
+                hash_table[key]+=1
+
+    max_count = 0
+    most_frequent_kmers = []
+
+    for kmer, count in hash_table.items():
+        if count > max_count:
+            max_count = count
+            most_frequent_kmers = [kmer]
+        elif count == max_count:
+            most_frequent_kmers.append(kmer)
+
+    print(' '.join(most_frequent_kmers))
 
 def BA1H(input_list):
     '''
-    Approximate occurences of patterns in a string'
+    Approximate occurences of patterns in a string.
     '''
     match_string=input_list[0]
     sequence=input_list[1]
@@ -17,7 +94,6 @@ def BA1H(input_list):
             positions.append(ind)
     positions=[str(x) for x in positions]
     print(' '.join(positions))
-    return ' '.join(positions)
 
 
 def BA1G(input_list):
@@ -30,7 +106,6 @@ def BA1G(input_list):
     sequence_q=input_list[1]
     hamming_d=hamming_distance(sequence_p, sequence_q)
     print(hamming_d)
-    return hamming_d
 
 
 def BA1F(input_list):
@@ -53,7 +128,6 @@ def BA1F(input_list):
     minimums=np.where(skews == np.array(skews).min())[0].tolist()
     str_minimums=[str(x) for x in minimums]
     print(' '.join(str_minimums))
-    return ' '.join(str_minimums)
     
 
 def BA1E(input_list):
@@ -80,7 +154,6 @@ def BA1E(input_list):
     solution_list=set(solution_list)
     solution_list=list(solution_list)
     print(' '.join(solution_list))
-    return ' '.join(solution_list)
 
 
 
@@ -98,7 +171,6 @@ def BA1D(input_list):
         if sequence[ind:ind+k]==kmer:
             locations.append(str(ind))
     print(' '.join(locations))
-    return ' '.join(locations)
 
 
 def BA1C(input_list):
@@ -118,8 +190,6 @@ def BA1C(input_list):
         rev=reverse_dct[sequence[s]]
         reverse_complement+=rev
     print(reverse_complement)
-    #print(len(sequence), len(reverse_complement))
-    return reverse_complement
 
 def BA1B(input_list):
     '''
@@ -158,8 +228,6 @@ def BA1A(input_list):
         if sequence[ind:ind+k]==kmer:
             count+=1
     print(count)
-    return count
-
     
 
 

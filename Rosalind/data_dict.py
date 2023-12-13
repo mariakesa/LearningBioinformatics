@@ -1,12 +1,35 @@
-from lib import BA1I, BA1H, BA1G, BA1F, BA1E, BA1D, BA1C, BA1B, BA1A
+from lib import BA1K, BA1J, BA1I, BA1H, BA1G, BA1F, BA1E, BA1D, BA1C, BA1B, BA1A
 
 caller_dict = {
+
+    'BA1K': {
+        'description': '''
+            Number of times k-mer
+            appears in sequence
+            with k-mers appear in
+            lexicographic order.
+            ''',
+        'algorithm_function': BA1K,
+        'dataset': 'rosalind_ba1k.txt'
+    },
+    
+    'BA1J': {
+        'description': '''Frequent words with mismatches
+            and reverse complements. Find
+            pattern that maximizes the sum
+            of its counts with mismatches 
+            and its reverse complement counts 
+            with mismatches.''',
+        'algorithm_function': BA1J,
+        'dataset': 'rosalind_ba1j.txt'
+    },
+
 
     'BA1I': {
         'description': 'Find all most frequent kmers up to d mismatches in text.',
         'algorithm_function': BA1I,
         'dataset': 'rosalind_ba1i.txt'
-    }
+    },
 
     'BA1H': {
         'description': 'Approximate occurences of patterns in a string',
