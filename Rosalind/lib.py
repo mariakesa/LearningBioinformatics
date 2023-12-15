@@ -1,6 +1,33 @@
 from helpers import generate_reverse_comp_hash, generate_all_subseq, find_kmers_in_window, hash_sequence, hamming_distance
 import numpy as np
 
+def BA1L(input_list):
+    '''
+    Number to genetic sequence.
+    '''
+    index=int(input_list[0])
+    k=int(input_list[1])
+    bases = ['A', 'C', 'G', 'T']
+    pattern = ''
+    for i in range(k):
+        pattern += bases[index % 4]
+        index = index // 4
+    return pattern[::-1]
+
+def BA1L(input_list):
+    '''
+    Genetic sequence to number
+    '''
+    seq = input_list[0]
+    print(seq)
+    encoding = {'A':0, 'C':1, 'G':2, 'T':3}
+    k = len(seq)
+    num = 0
+    for i in range(k):
+        print(encoding[seq[i]],k-i-1,pow(4, k-i-1))
+        num += encoding[seq[i]] * pow(4, k-i-1)
+    print(num)
+
 def BA1K(input_list):
     '''
     Number of times k-mer

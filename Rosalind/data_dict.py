@@ -1,6 +1,18 @@
-from lib import BA1K, BA1J, BA1I, BA1H, BA1G, BA1F, BA1E, BA1D, BA1C, BA1B, BA1A
+from lib import BA1M,BA1L, BA1K, BA1J, BA1I, BA1H, BA1G, BA1F, BA1E, BA1D, BA1C, BA1B, BA1A
 
 caller_dict = {
+
+    'BA1M': {
+        'description': 'Number to genetic sequence',
+        'algorithm_function': BA1M,
+        'dataset': 'rosalind_ba1m.txt'
+    },
+
+    'BA1L': {
+        'description': 'Genetic sequence to number',
+        'algorithm_function': BA1L,
+        'dataset': 'rosalind_ba1l.txt'
+    },
 
     'BA1K': {
         'description': '''
@@ -12,7 +24,7 @@ caller_dict = {
         'algorithm_function': BA1K,
         'dataset': 'rosalind_ba1k.txt'
     },
-    
+
     'BA1J': {
         'description': '''Frequent words with mismatches
             and reverse complements. Find
