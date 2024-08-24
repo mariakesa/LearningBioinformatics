@@ -1,7 +1,7 @@
 from helpers import generate_reverse_comp_hash, generate_all_subseq, find_kmers_in_window, hash_sequence, hamming_distance
 import numpy as np
 
-def BA1L(input_list):
+def BA1M(input_list):
     '''
     Number to genetic sequence.
     '''
